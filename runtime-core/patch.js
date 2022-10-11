@@ -80,14 +80,13 @@ export function createPatchFn(options) {
 
   function patchElement(n1, n2, parentComponent) {
     const el = n2.el = n1.el
-    let { patchFlag } = n2
-    const oldProps = n1.props || EMPTY_OBJ
-    const newProps = n2.props || EMPTY_OBJ
-
-    patchFlag = patchFlag | n1.patchFlag & PatchFlags.FULL_PROPS
 
     // full diff
     patchChildren(n1, n2, el, parentComponent)
+
+    // 根据 patchFlag 处理 props
+    // ...
+    // patchProps(el, n2, oldProps, newProps, parentComponent)
   }
 
   function patchProps(el, vnode, oldProps, newProps, parentComponent) {
@@ -233,14 +232,14 @@ export function createPatchFn(options) {
 
         const subTree
           = instance.subTree
-          = renderComponentRoot(instance)
+          = renderComponentRoot(instance) // 调用组件的 render 函数，获得组件 subTree
 
         patch(null, subTree, container, instance)
 
         initialVNode.el = subTree.el
         instance.isMounted = true
       } else {
-        let { next, vnode } = instance
+        let { next, vnode, parent } = instance
 
         if (next) { // next 表示新的组件 vnode
           next.el = vnode.el
@@ -255,6 +254,7 @@ export function createPatchFn(options) {
 
         // 组件更新
         patch(prevTree, nextTree, hostParentNode(prevTree.el), instance)
+        next.el = nextTree.el
       }
     }
 
@@ -276,6 +276,67 @@ export function createPatchFn(options) {
     } else {
       n2.el = n1.el
       instance.vnode = n2
+    }
+  }
+
+
+  /* 删除、移动 */
+  // ummount vnode
+  function unmount(vnode, parentComponent, doRemove = false) {
+    const { type, children, shapeFlag } = vnode
+
+    if (shapeFlag & ShapeFlags.COMPONENT) {
+      unmountComponent(vnode.component, doRemove)
+    } else {
+      unmountChildren(children, parentComponent)
+    }
+
+    if (doRemove) {
+      remove(vnode)
+    }
+  }
+  function unmountComponent(instance, doRemove) {
+    const { bm, um, subTree, update } = instance
+
+    if (update) {
+      update.active = false
+      ummount(subTree, instance, doRemove)
+    }
+
+    // component hooks
+  }
+  function unmountChildren(
+    children,
+    parentComponent,
+    doRemove = false,
+    start = 0
+  ) {
+    for (let i = start; i < children.length; i++) {
+      unmount(children, parentComponent, doRemove)
+    }
+  }
+  function move(vnode, container, moveType) {
+    const { el, type, children, shapeFlag } = vnode
+
+    // move Component
+    if (shapeFlag & ShapeFlags.COMPONENT) {
+      move(vnode.component.subTree, container, moveType)
+      return
+    }
+    // Fragment
+    // Teleport
+    // Static
+
+    hostInsert(el, container)
+  }
+  function remove(vnode) {
+    const { type, el, shapeFlag } = vnode
+
+    // if (type === Fragment)
+    // if (type === Static)
+
+    if (shapeFlag & ShapeFlags.ELEMENT) {
+      hostRemove(el)
     }
   }
 

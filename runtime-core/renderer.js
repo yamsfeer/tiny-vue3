@@ -18,8 +18,6 @@ function baseCreateRenderer(options) {
       // container._vnode 缓存的是旧 vnode
       patch(container._vnode || null, vnode, container)
     }
-    // flushPreFlushCbs()
-    // flushPostFlushCbs()
 
     // 缓存 vnode，表示已经渲染
     container._vnode = vnode

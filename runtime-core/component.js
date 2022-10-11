@@ -38,7 +38,7 @@ export function createComponentInstance(vnode, parent) {
   return instance
 }
 
-// 设置组件实例
+// 设置组件实例，主要针对 stateful 组件
 export function setupComponent(instance) {
   const { props, children } = instance.vnode
   const isStateful = isStatefulComponent(instance)
@@ -56,6 +56,7 @@ export function isStatefulComponent(instance) {
   return instance.vnode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT
 }
 
+// 处理 setup 函数
 export function setupStatefulComponent(instance) {
   const Component = instance.type
   const { setup } = Component // setup 函数
@@ -79,6 +80,9 @@ function handleSetupResult(instance, setupResult) {
   if (isFunction(setupResult)) {
     instance.render = setupResult
   } else if (isObject(setupResult)) {
+      // proxyRefs: isReactive(objWithRefs)
+      // ? objWithRefs
+      // : new Proxy(objWithRefs, shallowUnwrapHandler)
     instance.setupState = proxyRefs(setupResult)
   }
 
@@ -90,10 +94,10 @@ export function registerRuntimeCompiler(_compile) {
   compile = _compile
 }
 
+// 获取 render 函数
 export function finishComponentSetup(instance) {
   const Component = instance.type
 
-  // 获取 render 函数
   if (!instance.render) {
     if (compile && !Component.render) { // 模板未编译
       const template = Component.template

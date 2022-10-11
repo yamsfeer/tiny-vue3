@@ -22,6 +22,7 @@ function hasPropsChanged(prevProps, nextProps) {
     || nextKeys.some(key => nextProps[key] !== prevProps[key]) // props 值不同
 }
 
+// 调用组件的 render 函数，获得组件 subTree
 export function renderComponentRoot(instance) {
   const {
     type,

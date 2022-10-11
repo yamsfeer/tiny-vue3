@@ -7,6 +7,7 @@ export const Static = Symbol('Static')
 export const Fragment = Symbol('Fragment')
 
 export function createVnode(type, props, children) {
+  // normalize 参数
   // class & style normalization.
 
   // 对 props 做标准化处理

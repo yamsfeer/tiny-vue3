@@ -33,6 +33,8 @@ export function createAppAPI(render) {
 
         return vnode.component.proxy
       },
+      unmount() {},
+      provide() {}
     }
 
     return app
@@ -42,9 +44,12 @@ export function createAppAPI(render) {
 export function createAppContext() {
   return {
     app: null,
-    config: {},
+    config: {
+      compileOptions: {}
+    },
     mixins: [],
-    directives: []
+    directives: [],
+    components: {}
     // ...
   }
 }
