@@ -17,4 +17,9 @@ export function isArray(target) {
 export const EMPTY_OBJ = {}
 export const EMPTY_ARR = []
 
-export function NOOP() {}
+export function NOOP() { }
+
+
+export function hasChanged(value, oldValue) {
+  return oldValue !== value && !(Number.isNaN(oldValue) && Number.isNaN(value))
+}

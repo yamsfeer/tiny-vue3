@@ -59,20 +59,32 @@ export function isStatefulComponent(instance) {
 // 处理 setup 函数
 export function setupStatefulComponent(instance) {
   const Component = instance.type
-  const { setup } = Component // setup 函数
+
+  // 创建渲染代理的属性访问缓存
+  instance.accessCache = {}
+  // 创建渲染上下文代理，get、set、has、defineProperty
+  // 类似 this._data.msg => this.msg
+  instance.proxy = new Proxy(instance.ctx, PublicInstanceProxyHandlers)
+
+  // 处理 setup 函数
+  const { setup } = Component
 
   setup
-    ? startComponentSetup(instance)
+    ? startComponentSetup(instance, setup)
     : finishComponentSetup(instance)
 }
 
-function startComponentSetup(instance) {
-  // setCurrentInstance(instance)
-  // pauseTracking()
-  const setupResult = setup()
-  // resetTracking()
-  // unsetCurrentInstance()
+function startComponentSetup(instance, setup) {
+  // 如果 setup 带参数，则创建一个 setupContext
+  const setupContext
+    = instance.setupContext
+    = setup.length > 1
+      ? createSetupContext(instance)
+      : null
 
+  // 执行 setup 函数
+  const setupResult = setup(setupContext)
+  // 处理 setup 执行结果
   handleSetupResult(instance, setupResult)
 }
 
@@ -80,9 +92,9 @@ function handleSetupResult(instance, setupResult) {
   if (isFunction(setupResult)) {
     instance.render = setupResult
   } else if (isObject(setupResult)) {
-      // proxyRefs: isReactive(objWithRefs)
-      // ? objWithRefs
-      // : new Proxy(objWithRefs, shallowUnwrapHandler)
+    // proxyRefs: isReactive(objWithRefs)
+    // ? objWithRefs
+    // : new Proxy(objWithRefs, shallowUnwrapHandler)
     instance.setupState = proxyRefs(setupResult)
   }
 

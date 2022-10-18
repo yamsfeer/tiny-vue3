@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "description": "tiny vue3",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "mocha vue3/reactivity/test",
-    "build:vue2": "rollup vue2/vue.js --file dist/toy-vue2.js",
-    "build:vue3": "rollup vue3/index.js --file dist/toy-vue3.js",
-    "cover": "nyc --all --include=vue2/**/*.js mocha"
+    "test": "mocha reactivity/test/computed.test.js",
+    "build": "rollup index.js --file dist/tiny-vue3.js",
+    "cover": "nyc --all --include=reactivity/test/*.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yamsfeer/tiny-vue3.git"
   },
-  "keywords": ["tiny", "mini", "vue3"],
+  "keywords": [
+    "tiny",
+    "mini",
+    "vue3"
+  ],
   "author": "yamsfeer",
   "license": "MIT",
   "bugs": {

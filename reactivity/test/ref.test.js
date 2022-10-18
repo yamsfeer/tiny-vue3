@@ -1,5 +1,6 @@
 import { effect } from '../effect.js'
-import { ref, shallowRef } from '../ref.js'
+import { reactive } from '../reactive.js'
+import { ref } from '../ref.js'
 import { assert, expect } from 'chai'
 
 describe('ref', () => {
@@ -34,4 +35,16 @@ describe('ref', () => {
     a.value.count = 2
     expect(dummy).to.equal(2)
   })
+
+  it('should work without initial value', () => {
+    const a = ref()
+    let dummy
+    effect(() => {
+      dummy = a.value
+    })
+    expect(dummy).to.equal(undefined)
+    a.value = 2
+    expect(dummy).to.equal(2)
+  })
+
 })

@@ -1,17 +1,18 @@
 export {
   reactive,
+  isReactive,
   shallowReactive
-} from './reactive'
+} from './reactive.js'
 
 export {
   ref,
   shallowRef
-} from './ref'
+} from './ref.js'
 
 export {
   effect
-} from './effect'
+} from './effect.js'
 
 export {
   computed
-} from './computed'
+} from './computed.js'
