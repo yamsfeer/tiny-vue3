@@ -23,8 +23,9 @@ function createRef(rawValue, shallow = false) {
         return newValue
       }
 
-      const useDirectValue = shallow || isShallow(newValue) || isReadonly(newValue)
-      value = useDirectValue ? newValue : toReactive(newValue)
+      // const useDirectValue = shallow || isShallow(newValue) || isReadonly(newValue)
+      // value = useDirectValue ? newValue : toReactive(newValue)
+      value = newValue
 
       trigger(proxy, 'value')
     }

@@ -1,7 +1,6 @@
+import { describe, expect, it } from 'vitest'
 import { effect } from '../effect.js'
-import { reactive } from '../reactive.js'
 import { ref } from '../ref.js'
-import { assert, expect } from 'chai'
 
 describe('ref', () => {
   it('should hold a value', () => {

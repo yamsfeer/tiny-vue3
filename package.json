@@ -5,9 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha reactivity/test/computed.test.js",
-    "build": "rollup index.js --file dist/tiny-vue3.js",
-    "cover": "nyc --all --include=reactivity/test/*.js"
+    "build": "vite build",
+    "watch": "vitest",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,8 @@
   },
   "homepage": "https://github.com/yamsfeer/tiny-vue3#readme",
   "devDependencies": {
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
-    "rollup": "^2.79.0"
+    "@vitest/coverage-c8": "^0.24.3",
+    "vite": "^3.1.8",
+    "vitest": "^0.24.3"
   }
 }

@@ -35,7 +35,7 @@ export function computed(getterOrOptions) {
 
   const effectFn = effect(getter, {
     lazy: true,
-    scheduler: () => {
+    scheduler() {
       dirty = true // 当依赖变化时，不直接求新值，而是将 dirty 改为 false
       trigger(obj, 'value')
     }

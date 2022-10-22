@@ -17,12 +17,12 @@ export function effect(fn, options = {}) {
 
   effectFn.deps = [] // cleanup: 用来存储包含当前 effectFn 的依赖集合，用于 cleanup
 
-  if (!options.lazy) { // computed 的 lazy 为 true
-    effectFn()
-  }
-
   if (options.scheduler) {
     effectFn.scheduler = options.scheduler
+  }
+
+  if (!options.lazy) { // computed 的 lazy 为 true
+    effectFn()
   }
 
   return effectFn
@@ -37,7 +37,6 @@ function cleanup(effectFn) {
   effectFn.deps.forEach(deps => deps.delete(effectFn)) // 清空依赖集合对 effectFn 的引用
   effectFn.deps.length = 0 // 清空 effectFn 对依赖集合的引用
 }
-
 
 /*
 targetMap: { // 所有 reactive 的对象
@@ -78,20 +77,23 @@ export function trigger(target, key) {
      forEach 遍历 set 集合时，如果一个值已被访问过但又重新添加到集合
      且遍历还未结束，该值会被重新访问
      每次调用 effectFn 都会先 cleanup 删除 effectFn，然后重新收集，形成循环 */
-  const effectsToRun = new Set(effects)
+  const effectsToRun = new Set()
+
+  effects && effects.forEach(effectFn => {
+    /* 如果当前副作用函数正在被收集依赖，则不能执行
+       const obj = reactive({ foo: 1 })
+       obj.foo++ 既读取又设置 foo 的值
+       读取时将副作用函数添加到依赖集合，设置时又执行该副作用函数
+       但该副作用函数正在执行，这会形成递归调用自己 */
+    // if (activeEffect !== effectFn) {
+    effectsToRun.add(effectFn)
+    // }
+  })
 
   effectsToRun.forEach(effectFn => {
     if (effectFn.scheduler) {
       effectFn.scheduler()
-      return
-    }
-
-    // 如果当前副作用函数正在被收集依赖，则不能执行
-    /* const obj = reactive({ foo: 1 })
-       obj.foo = obj.foo + 1 既读取又设置 foo 的值
-       读取时将副作用函数添加到依赖集合，设置时又执行该副作用函数
-       但该副作用函数正在执行，这会形成递归调用自己 */
-    if (activeEffect !== effectFn) {
+    } else {
       effectFn()
     }
   })

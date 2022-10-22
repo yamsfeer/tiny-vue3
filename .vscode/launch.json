@@ -8,14 +8,18 @@
       "type": "node",
       "request": "launch",
       "name": "debug reactive",
+      "autoAttachChildProcesses": true,
       "skipFiles": [
-        "${workspaceFolder}/reactivity/test/ref.test.js" // 没起作用
+        "<node_internals>/**",
+        "**/node_modules/**"
       ],
-      "program": "/usr/local/bin/mocha",
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
       "args": [
-        "${workspaceFolder}/reactivity/test"
+        "run",
+        "${relativeFile}"
       ],
-      "console": "integratedTerminal" // 在终端输出结果
+      "smartStep": true,
+      "console": "integratedTerminal"
     }
   ]
 }

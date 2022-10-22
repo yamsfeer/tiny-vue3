@@ -14,7 +14,7 @@ function createReactiveObject(target, isShallow = false, isReadonly = false) {
   // 非对象、reactive 对象、已经响应式处理过的对象、readonly 对象，都直接返回
   if (!isObject(target)) return target
   if (isReactive(target)) return target
-  if (isReadonly(target)) return target
+  // if (isReadonly(target)) return target
 
   const existingProxy = proxyMap.get(target)
   if (existingProxy) {
@@ -64,8 +64,8 @@ function createReactiveObject(target, isShallow = false, isReadonly = false) {
       return res
     },
     deleteProperty(target, key, receiver) { },
-    has() { },
-    ownKeys() { },
+    // has() { },
+    // ownKeys() { },
   })
 
   proxyMap.set(target, observer)
