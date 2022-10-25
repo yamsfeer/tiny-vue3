@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
-import { reactive } from '../reactive'
-import { watch } from '../watch'
+import { reactive } from '../src/reactive'
+import { watch } from '../src/watch'
 
 describe('watch', () => {
   it('watch reactive object', () => {

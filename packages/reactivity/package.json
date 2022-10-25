@@ -1,0 +1,21 @@
+{
+  "name": "@yamsvue/reactivity",
+  "version": "0.0.1",
+  "description": "",
+  "module": "./dist/reactivity.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "build": "rollup --input index.js --file dist/reactivity.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@yamsvue/shared": "workspace:^0.0.1",
+    "rollup": "^3.2.3"
+  }
+}

@@ -1,6 +1,2 @@
 packages:
-  - compiler
-  - reactivity
-  - runtime-core
-  - runtime-dom
-  - shared
+  - packages/*

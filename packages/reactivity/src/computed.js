@@ -1,4 +1,4 @@
-import { isFunction, NOOP } from '../shared/index.js'
+import { isFunction, NOOP } from '@yamsvue/shared'
 import { effect, track, trigger } from './effect.js'
 
 /*

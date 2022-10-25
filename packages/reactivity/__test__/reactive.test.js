@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { reactive, isReactive } from '../reactive.js'
-import { ref, isRef } from '../ref.js'
+import { reactive, isReactive } from '../src/reactive.js'
+import { ref, isRef } from '../src/ref.js'
 
 /**
  * 基本类型 => 返回其本身

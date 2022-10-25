@@ -1,0 +1,19 @@
+{
+  "name": "@yamsvue/shared",
+  "version": "0.0.1",
+  "description": "",
+  "module": "dist/shared.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --input index.js --file dist/shared.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "rollup": "^3.2.3"
+  }
+}

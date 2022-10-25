@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { effect } from '../effect.js'
-import { ref } from '../ref.js'
+import { effect } from '../src/effect.js'
+import { ref } from '../src/ref.js'
 
 describe('ref', () => {
   it('should hold a value', () => {

@@ -1,3 +1,6 @@
+export * from './src/patchFlag.js'
+export * from './src/shapeFlag.js'
+
 export function isObject(target) {
   return target !== null && typeof target === 'object'
 }

@@ -7,7 +7,7 @@ export {
   shallowReactive,
   readonly,
   shallowReadonly,
-} from './reactive.js'
+} from './src/reactive.js'
 
 export {
   ref,
@@ -17,18 +17,18 @@ export {
   toRefs,
   proxyRefs,
   unref,
-} from './ref.js'
+} from './src/ref.js'
 
 export {
   effect,
   track,
   trigger
-} from './effect.js'
+} from './src/effect.js'
 
 export {
   computed
-} from './computed.js'
+} from './src/computed.js'
 
 export {
   watch
-} from './watch.js'
+} from './src/watch.js'

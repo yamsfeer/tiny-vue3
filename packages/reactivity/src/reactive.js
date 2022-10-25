@@ -1,6 +1,6 @@
 import { track, trigger } from './effect.js'
 import { isRef } from './ref.js'
-import { isObject, hasChanged } from '../shared/index.js'
+import { isObject, hasChanged } from '@yamsvue/shared'
 
 export const ReactiveFlags = {
   IS_REACTIVE: '__v_isReactive',

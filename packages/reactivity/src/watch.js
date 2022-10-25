@@ -1,5 +1,5 @@
-import { isFunction, isObject } from '../shared';
-import { effect } from './effect';
+import { isFunction, isObject } from '@yamsvue/shared'
+import { effect } from './effect'
 
 function traverse(value, seen = new Set) {
   // 不是对象或已经被访问过

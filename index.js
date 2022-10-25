@@ -1,1 +1,2 @@
-export * from './reactivity/index.js'
+export * from '@yamsvue/reactivity'
+export * from '@yamsvue/shared'

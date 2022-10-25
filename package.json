@@ -1,9 +1,23 @@
 {
-  "name": "tiny-vue3",
+  "name": "@yamsvue/tiny-vue3",
   "version": "1.0.0",
   "description": "tiny vue3",
-  "main": "index.js",
+  "main": "dist/tiny-vue3.umd.cjs",
+  "module": "dist/tiny-vue3.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/vue3.mjs",
+      "import": "./dist/vue3.ejs"
+    },
+    "./reactivity": {
+      "require": "./reactivity/dist/reactivity.mjs",
+      "import": "./reactivity/dist/reactivity.ejs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build",
     "watch": "vitest",
@@ -27,6 +41,9 @@
   "homepage": "https://github.com/yamsfeer/tiny-vue3#readme",
   "devDependencies": {
     "@vitest/coverage-c8": "^0.24.3",
+    "@yamsvue/reactivity": "workspace:^0.0.1",
+    "@yamsvue/shared": "workspace:^0.0.1",
+    "rollup": "^3.2.3",
     "vite": "^3.1.8",
     "vitest": "^0.24.3"
   }

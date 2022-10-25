@@ -1,6 +1,6 @@
-import { reactive } from '../reactive.js'
-import { ref, isRef } from '../ref.js'
-import { computed } from '../computed.js'
+import { reactive } from '../src/reactive.js'
+import { ref, isRef } from '../src/ref.js'
+import { computed } from '../src/computed.js'
 import { describe, expect, it } from 'vitest'
 import { vi } from 'vitest'
 

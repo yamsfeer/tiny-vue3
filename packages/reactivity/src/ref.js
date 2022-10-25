@@ -1,6 +1,6 @@
 import { track, trigger } from './effect.js'
 import { toReactive, isReadonly, isShallow } from './reactive.js'
-import { isObject, hasChanged } from '../shared/index.js'
+import { isObject, hasChanged } from '@yamsvue/shared'
 
 function createRef(rawValue, shallow = false) {
   if (isRef(rawValue)) {
