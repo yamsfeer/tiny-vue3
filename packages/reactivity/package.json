@@ -15,7 +15,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@yamsvue/shared": "workspace:^0.0.1",
-    "rollup": "^3.2.3"
+    "@yamsvue/shared": "workspace:^0.0.1"
   }
 }

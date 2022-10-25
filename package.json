@@ -41,10 +41,12 @@
   "homepage": "https://github.com/yamsfeer/tiny-vue3#readme",
   "devDependencies": {
     "@vitest/coverage-c8": "^0.24.3",
-    "@yamsvue/reactivity": "workspace:^0.0.1",
-    "@yamsvue/shared": "workspace:^0.0.1",
     "rollup": "^3.2.3",
     "vite": "^3.1.8",
     "vitest": "^0.24.3"
+  },
+  "dependencies": {
+    "@yamsvue/reactivity": "workspace:^0.0.1",
+    "@yamsvue/shared": "workspace:^0.0.1"
   }
 }
